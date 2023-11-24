@@ -1,6 +1,7 @@
 # Redactem
 [![License](http://poser.pugx.org/gbhorwood/redactem/license)](https://packagist.org/packages/gbhorwood/redactem)
-[![License](http://poser.pugx.org/gbhorwood/redactem/require/php)](https://packagist.org/packages/gbhorwood/redactem)
+[![Latest Stable Version](http://poser.pugx.org/gbhorwood/redactem/v)](https://packagist.org/packages/gbhorwood/redactem)
+[![PHP Version Require](http://poser.pugx.org/gbhorwood/redactem/require/php)](https://packagist.org/packages/gbhorwood/redactem)
 
 Redactem is php package for redacting values from json. If you need to scrub out passwords or credit card numbers, or the value of any key/value pair identified by key or regular expression, from a string of json before writing it to disk or db, Redactem can do that.
 
