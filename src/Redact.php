@@ -223,10 +223,6 @@ class Redact
         /**
          * Accepts the key and value of a key/value pair and returns the new value.
          * Value is redacted with $redactionText if $shouldRedact evaluates to true.
-         *
-         * @param  String $k
-         * @param  Any    $v
-         * @return Any
          */
         $getVal = function ($k, $v) use ($shouldRedact, $redactionText) {
             return $shouldRedact($k, $v) ? $redactionText($v) : $v;
@@ -234,10 +230,7 @@ class Redact
 
         /**
          * Recurse across $json, evaluating each key/value pair with $shouldRedact and
-         * replacing the value with $redactionText if true.
-         *
-         * @param  Array $json
-         * @return Array
+         * replacing the value with $redactionText if true by applying $getVal.
          */
         $traverse = function (array $json) use (&$traverse, $getVal) {
             foreach($json as $k => $v) {
@@ -249,7 +242,7 @@ class Redact
                 elseif(is_scalar($v) || is_null($v)) {
                     $json[$k] = $getVal($k, $json[$k]);
                 }
-                // handle any array or object: decode an recurse
+                // handle any array or object: decode and recurse
                 else {
                     $json[$k] = $traverse($json[$k]);
                 }
