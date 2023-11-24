@@ -2,7 +2,9 @@
 [![License](http://poser.pugx.org/gbhorwood/redactem/license)](https://packagist.org/packages/gbhorwood/redactem)
 [![License](http://poser.pugx.org/gbhorwood/redactem/require/php)](https://packagist.org/packages/gbhorwood/redactem)
 
-Redactem is php package for redacting values from json. Need to scrub out passwords or credit card numbers (or some custom values defined by key names or regular expressions) from some json before writing it to disk or you db? Redactem can do that.
+Redactem is php package for redacting values from json. If you need to scrub out passwords or credit card numbers, or the value of any key/value pair identified by key or regular expression, from a string of json before writing it to disk or db, Redactem can do that.
+
+Redactem was developed as an internal-use tool for fruitbat studios/cloverhitch technologies/kludgetastic implementations.
 
 ## Install
 Redactem is installed via composer:
@@ -70,7 +72,7 @@ This method redacts all values keyed with the following:
 
 If you have password data that is keyed with a different key than listed, you can use the `byKey()` method.
 
-Password values are replaced by default with '`*****`' (five asterisks). If you would like set a custom redaction text, `passwords()` takes a redaction text as an optional second argument.
+Password values are replaced by default with '`*****`' (five asterisks). If you would like to set a custom redaction text, `passwords()` takes a redaction text as an optional second argument.
 
 ```php
 $redactedJson = \Gbhorwood\Redact\Redact::passwords($originalJson, 'REDACTED');
@@ -85,7 +87,7 @@ $redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson);
 
 Credit card numbers are identified by a regular expression that matches major credit card vendor's patterns. 
 
-Credit card values are replaced with a redaction text of asterisks the length of the credit card number.  If you would like set a custom redaction text, `creditcards()` takes a redaction text as an optional second argument.
+Credit card values are replaced with a redaction text of asterisks the length of the credit card number.  If you would like to set a custom redaction text, `creditcards()` takes a redaction text as an optional second argument.
 
 ```php
 $redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson, 'REDACTED');
@@ -95,12 +97,12 @@ $redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson, 'REDACTED')
 Redacting email addresses can be done with the `emails()` convenience method:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson);
+$redactedJson = \Gbhorwood\Redact\Redact::emails($originalJson);
 ```
 
 Email address are matched using php's `filter_var()` function with `FILTER_VALIDATE_EMAIL`.
 
-Email values are replaced with a partial redaction of the email, allowing it to be recognized by readers that already know the email address. For instance, the email address `gbhorwood@example.ca` would be redacted as `gb*****od@ex***le.ca`. If you would like set a custom redaction text, `emails()` takes a redaction text as an optional second argument.
+Email values are replaced with a partial redaction of the email, allowing it to be recognized by readers that already know the email address. For instance, the email address `gbhorwood@example.ca` would be redacted as `gb*****od@ex***le.ca`. If you would like to set a custom redaction text, `emails()` takes a redaction text as an optional second argument.
 
 ```php
 $redactedJson = \Gbhorwood\Redact\Redact::emails($originalJson, 'REDACTED');
@@ -130,6 +132,8 @@ Redactions can be done for multiple keys by calling `byKeys` and passing an arra
 ```php
 $redactedJson = \Gbhorwood\Redact\Redact::byKeys($originalJson, ['somekey', 'otherkey'], true, 'REDACTED');
 ```
+
+The `byKeys` method behaves identically to the `byKey` method, the only difference being the second argument is an array of keys.
 
 ## Custom redactions by regex
 Redactions can be done by supplying a regular expression to match values to redact
