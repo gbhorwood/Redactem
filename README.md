@@ -118,7 +118,7 @@ $redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'somekey');
 By default, keys are treated as _case insensitive_. If you wish to enable case sensitivity, pass true as an optional third argument
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'somekey', true);
+$redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'SomeKey', true);
 ```
 
 The default behaviour is to redact values with the default redaction text of `*****` (five asterisks). A custom redaction text can be supplied as an optional fourth argument
