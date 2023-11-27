@@ -54,7 +54,7 @@ After:
 Redacting passwords can be done with the `passwords()` convenience method:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::passwords($originalJson);
+$redactedJson = \Gbhorwood\Redactem\Redact::passwords($originalJson);
 ```
 
 This method redacts all values keyed with the following:
@@ -77,14 +77,14 @@ If you have password data that is keyed with a different key than listed, you ca
 Password values are replaced by default with '`*****`' (five asterisks). If you would like to set a custom redaction text, `passwords()` takes a redaction text as an optional second argument.
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::passwords($originalJson, 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::passwords($originalJson, 'REDACTED');
 ```
 
 ## Redacting credit card numbers
 Redacting credit card numbers can be done with the `creditcards()` convenience method:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson);
+$redactedJson = \Gbhorwood\Redactem\Redact::creditcards($originalJson);
 ```
 
 Credit card numbers are identified by a regular expression that matches major credit card vendor's patterns. 
@@ -92,14 +92,14 @@ Credit card numbers are identified by a regular expression that matches major cr
 Credit card values are replaced with a redaction text of asterisks the length of the credit card number.  If you would like to set a custom redaction text, `creditcards()` takes a redaction text as an optional second argument.
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::creditcards($originalJson, 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::creditcards($originalJson, 'REDACTED');
 ```
 
 ## Redacting emails
 Redacting email addresses can be done with the `emails()` convenience method:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::emails($originalJson);
+$redactedJson = \Gbhorwood\Redactem\Redact::emails($originalJson);
 ```
 
 Email address are matched using php's `filter_var()` function with `FILTER_VALIDATE_EMAIL`.
@@ -107,32 +107,32 @@ Email address are matched using php's `filter_var()` function with `FILTER_VALID
 Email values are replaced with a partial redaction of the email, allowing it to be recognized by readers that already know the email address. For instance, the email address `gbhorwood@example.ca` would be redacted as `gb*****od@ex***le.ca`. If you would like to set a custom redaction text, `emails()` takes a redaction text as an optional second argument.
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::emails($originalJson, 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::emails($originalJson, 'REDACTED');
 ```
 
 ## Custom redactions by key
 Redactions can be done by specifying a key of a key/value pair to redact:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'somekey');
+$redactedJson = \Gbhorwood\Redactem\Redact::byKey($originalJson, 'somekey');
 ```
 
 By default, keys are treated as _case insensitive_. If you wish to enable case sensitivity, pass true as an optional third argument
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'SomeKey', true);
+$redactedJson = \Gbhorwood\Redactem\Redact::byKey($originalJson, 'SomeKey', true);
 ```
 
 The default behaviour is to redact values with the default redaction text of `*****` (five asterisks). A custom redaction text can be supplied as an optional fourth argument
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byKey($originalJson, 'somekey', true, 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::byKey($originalJson, 'somekey', true, 'REDACTED');
 ```
 
 Redactions can be done for multiple keys by calling `byKeys` and passing an array of keys:
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byKeys($originalJson, ['somekey', 'otherkey'], true, 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::byKeys($originalJson, ['somekey', 'otherkey'], true, 'REDACTED');
 ```
 
 The `byKeys` method behaves identically to the `byKey` method, the only difference being the second argument is an array of keys.
@@ -141,7 +141,7 @@ The `byKeys` method behaves identically to the `byKey` method, the only differen
 Redactions can be done by supplying a regular expression to match values to redact
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byRegex($originalJson, '/someregex/');
+$redactedJson = \Gbhorwood\Redactem\Redact::byRegex($originalJson, '/someregex/');
 ```
 
 Regular expressions supplied to `byRegex()` are matched against values using php's `preg_match()`.
@@ -149,7 +149,7 @@ Regular expressions supplied to `byRegex()` are matched against values using php
 The default behaviour is to redact values with the default redaction text of `*****` (five asterisks). A custom redaction text can be supplied as an optional third argument
 
 ```php
-$redactedJson = \Gbhorwood\Redact\Redact::byRegex($originalJson, '/someregex/', 'REDACTED');
+$redactedJson = \Gbhorwood\Redactem\Redact::byRegex($originalJson, '/someregex/', 'REDACTED');
 ```
 
 ## Writing custom redaction rules
