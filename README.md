@@ -24,7 +24,7 @@ use Gbhorwood\Redactem\Redact;
 ```
 
 ## Features
-Redactem finds and replaces values in json with a chosen or default redaction text. Replacements are done to an arbitrary depth in nested strucutres. Valid json stored as a string is also processed.
+Redactem finds and replaces values in json with a chosen or default redaction text. Replacements are done to an arbitrary depth in nested strucutres. Valid json stored as strings is also processed.
 
 Finding values to redact can be done by key name, case sensitive or insensitive, or by regular expression matches on values. Redactem offers convenience methods to redact passwords, credit card number, or emails, but also allows you to write your own rulesets.
 
