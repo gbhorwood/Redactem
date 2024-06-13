@@ -148,8 +148,8 @@ class Redact
     {
         // function to test key equivalence
         $shouldRedact = $caseSensitive ?
-            fn ($k, $v) => (bool)in_array(trim($k), array_filter($keys)) :
-            fn ($k, $v) => (bool)in_array(strtolower(trim($k)), array_filter(array_map('trim', array_map('strtolower', $keys))));
+            fn ($k, $v) => (bool)in_array(trim((string)$k), array_filter($keys)) :
+            fn ($k, $v) => (bool)in_array(strtolower(trim((string)$k)), array_filter(array_map('trim', array_map('strtolower', $keys))));
 
         // function to create redaction text, either passed $text or default
         $redactionText = is_null($text) ? self::defaultRedactionText() : fn ($v) => $text;
@@ -183,7 +183,7 @@ class Redact
      */
     public static function matchPasswordFunction(): callable
     {
-        return fn ($k, $v) => (bool)in_array(strtolower(trim($k)), array_map('trim', array_map('strtolower', self::$passwordKeys)));
+        return fn ($k, $v) => (bool)in_array(strtolower(trim((string)$k)), array_map('trim', array_map('strtolower', self::$passwordKeys)));
     }
 
     /**
@@ -203,7 +203,7 @@ class Redact
      */
     public static function matchEmailFunction(): callable
     {
-        return fn ($k, $v) => (bool)filter_var(trim($v), FILTER_VALIDATE_EMAIL);
+        return fn ($k, $v) => (bool)filter_var(trim((string)$v), FILTER_VALIDATE_EMAIL);
     }
 
     /**
